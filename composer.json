@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "milon/barcode": "^10.0",
-        "simplesoftwareio/simple-qrcode": "~4"
+        "simplesoftwareio/simple-qrcode": "~4",
+        "yajra/laravel-datatables-oracle": "^9.21"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
