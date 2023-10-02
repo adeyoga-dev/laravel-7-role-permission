@@ -1,0 +1,53 @@
+body{
+    background-color: #F3F6FB;
+}
+
+.card{
+    box-shadow: -2px 10px 24px 0px rgba(0,0,0,0.16);
+    -webkit-box-shadow: -2px 10px 24px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: -2px 10px 24px 0px rgba(0,0,0,0.16);
+}
+
+.card-header{
+    background-color: #212529;
+    color: white;
+}
+
+.modal-header{
+    background-color: #212529;
+    color: white;
+}
+
+.text-bg-dark{
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.modal-content{
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.btn-close{
+    background-color: #DC3545;
+}
+
+.form-control{
+    border: 2px solid #212529;
+}
+
+.form-select{
+    border: 2px solid #212529;
+}
+
+.btn{
+    border: 2px solid #212529;
+}
+
+.card{
+    border: 0px ;
+}
+
+td{
+    text-align: center;
+}

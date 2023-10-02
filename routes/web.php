@@ -19,5 +19,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//route home
+Route::get('home', 'HomeController@index')->name('home');
+// route user
+Route::resource('user','UserController');
+Route::get('/get_use_datatable', 'UserController@getUserDatatable')->name('user.get.datatable');
+// route role
+Route::resource('role','RoleController');
+Route::get('/get_role_json', 'RoleController@getRoleJson')->name('role.get.json');

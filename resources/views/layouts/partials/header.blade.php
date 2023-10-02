@@ -29,13 +29,13 @@
                     Menu
                 </a>
                 <ul class="dropdown-menu p-2 rounded-3 mx-0 border-0 shadow w-220px"data-bs-theme="dark">
-                    <li>Manajemen</li>
+                    <li class="dropdown-item">Manajemen</li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item rounded-2" href="#">User</a></li>
-                    <li><a class="dropdown-item rounded-2" href="#">Roles</a></li>
-                    <li><a class="dropdown-item rounded-2" href="#">Permissions</a></li>
+                    <li><a class="dropdown-item" href="{{route('user.index')}}">User</a></li>
+                    <li><a class="dropdown-item" href="#">Roles</a></li>
+                    <li><a class="dropdown-item" href="#">Permissions</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
