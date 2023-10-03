@@ -23,7 +23,8 @@ Auth::routes();
 Route::get('home', 'HomeController@index')->name('home');
 // route user
 Route::resource('user','UserController');
-Route::get('/get_use_datatable', 'UserController@getUserDatatable')->name('user.get.datatable');
+Route::get('/get_user_datatable', 'UserController@getUserDatatable')->name('user.get.datatable');
 // route role
 Route::resource('role','RoleController');
 Route::get('/get_role_json', 'RoleController@getRoleJson')->name('role.get.json');
+Route::get('/get_role_datatable', 'RoleController@getRoleDatatable')->name('role.get.datatable');

@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->roles->pluck('id');
     }
+
+    public function revokeAllRoles()
+    {
+        $this->roles()->detach();
+    }
 }

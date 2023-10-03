@@ -34,7 +34,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="{{route('user.index')}}">User</a></li>
-                    <li><a class="dropdown-item" href="#">Roles</a></li>
+                    <li><a class="dropdown-item" href="{{route('role.index')}}">Roles</a></li>
                     <li><a class="dropdown-item" href="#">Permissions</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -44,7 +44,7 @@
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();
                         ">
-                            Logout
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf

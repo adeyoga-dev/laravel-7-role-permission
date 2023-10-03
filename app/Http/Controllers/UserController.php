@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-// modal
+// model
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 // package
@@ -13,7 +13,7 @@ class UserController extends Controller
     public  function __construct()
     {
         $this->middleware('permission:view user', ['only' => ['index']]);
-        $this->middleware('permission:show user', ['only' => ['show','get','getUserDatatable']]);
+        $this->middleware('permission:show user', ['only' => ['show','getUserDatatable']]);
         $this->middleware('permission:create user', ['only' => ['create store']]);
         $this->middleware('permission:edit user', ['only' => ['edit update']]);
         $this->middleware('permission:delete user', ['only' => ['destroy']]);
@@ -21,6 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
+        //kirim hasil
         return view('pages.user.index');
     }
 
@@ -28,14 +29,19 @@ class UserController extends Controller
     {
         // mendapatkan data user format datatable
         $users = User::get();
+        //kirim hasil
         return DataTables::of($users)
         ->addIndexColumn()
         ->addColumn('action', function($row){
             $btnActive = $this->buttonAction("success","btnActive","Aktifkan","fa-solid fa-check",$row->id);
-            $btnNonActive = $this->buttonAction("danger","btnNonActive","Non-Aktifkan","fa-solid fa-circle-xmark",$row->id);
+            $btnNonActive = $this->buttonAction("warning","btnNonActive","Non-Aktifkan","fa-solid fa-circle-xmark",$row->id);
             $btnStatus = $btnActive;
             // cek tombol status berdasarkan status akun
             if($row->status == 'active') $btnStatus = $btnNonActive;
+            //cek jika akun super admin
+            if($row->id == 1){
+                return "Tidak ada aksi";
+            }
             return
                 $this->buttonAction("primary","btnView","Lihat/Edit","fa-solid fa-pen-to-square",$row->id)
                 .$this->buttonAction("danger","btnDelete","Hapus","fa-solid fa-trash",$row->id)
@@ -73,6 +79,7 @@ class UserController extends Controller
             'user' => $user,
             'roleId' => $roleId
         ];
+        //kirim hasil
         return $data;
 
     }
@@ -80,28 +87,34 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        //check jika user ada
+        if(!isset($user)){
+            return "Gagal di non-aktifkan";
+        }
         //update status user
         if($user->status == "active"){
             $user->status = "nonactive";
+            $message = "Berhasil di non-aktifkan";
         }else{
             $user->status = "active";
+            $message = "Berhasil di aktifkan";
         }
-        if($user){
-            $user->save();
-            return "Berhasil di aktifkan";
-        }
-        return "Gagal di non-aktifkan";
+        $user->save();
+        //kirim hasil
+        return $message;
     }
 
     public function update(Request $request, $id)
     {
         $user = User::find($id);
         $role = Role::find($request->roleId);
+        //menghapus semua role pada user
+        $user->revokeAllRoles();
         //update data user
         $user->name = $request->name;
         $user->assignRole($role);
         $user->save();
-        //cek jika data tidak ada
+        //cek jika data ada lalu kirim hasil
         if($user && $role) return "Berhasil disimpan";
         return "Gagal disimpan";
     }
@@ -110,7 +123,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+        //cek jika data ada lalu kirim hasil
         if($user) return "Berhasil dihapus";
         return "Gagal terhapus";
     }
+
 }

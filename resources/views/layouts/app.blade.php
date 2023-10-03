@@ -19,9 +19,7 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     @stack('custom-style')
-
 </head>
-
 <body>
     <!-- Header -->
     @include('layouts.partials.header')
@@ -41,6 +39,7 @@
     <script src="//kit.fontawesome.com/9d9ec351a4.js" crossorigin="anonymous"></script>
     <!-- Custom Scripts-->
     @stack('custom-script')
+    <script src="{{asset('js/my.script.js')}}"></script>
     <script>
         let token = $("meta[name='csrf-token']").attr("content");
     </script>

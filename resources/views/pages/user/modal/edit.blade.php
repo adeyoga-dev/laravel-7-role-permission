@@ -104,42 +104,6 @@
                 }
             });
         });
-        //#########################################################################
-        $( document ).on("click", "#btnActive,#btnNonActive", function(){
-            var userId = $(this).attr("data-id");
-            // mereplace url dengan id
-            var url = "{{ route('user.edit', '#id') }}";
-            var newUrl = url.replace("#id", userId);
-            // mengupdate status user
-            $.ajax({
-                type : "GET",
-                url : newUrl,
-                success : function(data){
-                    $('#userTable').DataTable().ajax.reload();
-                    alert(data);
-                }
-            });
-        });
-        //#########################################################################
-        $( document ).on("click", "#btnDelete", function(){
-            var userId = $(this).attr("data-id");
-            console.log(userId);
-            // mereplace url dengan id
-            var url = "{{ route('user.destroy', '#id') }}";
-            var newUrl = url.replace("#id", userId);
-            // mengupdate status user
-            $.ajax({
-                type : "DELETE",
-                url : newUrl,
-                data : {
-                    "_token": token
-                },
-                success : function(data){
-                    $('#userTable').DataTable().ajax.reload();
-                    alert(data);
-                }
-            });
-        });
     });
 </script>
 
