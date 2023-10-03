@@ -6,6 +6,9 @@
                 <button type="button" class="btn-close button-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div id="errorMessage">
+                    <!-- tempat pesan error -->
+                </div>
                 <div class="form-group row mb-3">
                     <label for="name" class="col-md-2 col-form-label text-md-right">Nama</label>
                     <div class="col-md-10">
@@ -98,9 +101,17 @@
                     "_token": token
                 },
                 success : function(data){
-                    $("#editUserModal").modal("toggle");
-                    $('#userTable').DataTable().ajax.reload();
-                    alert(data);
+                    //cek jika ada pesan error
+                    if($.isEmptyObject(data.error)){
+                        $("#editUserModal").modal("toggle");
+                        $('#userTable').DataTable().ajax.reload();
+                        alert(data);
+                        //mereset error message
+                        $("#errorMessage").empty();
+                    }else{
+                        printErrorMsg(data.error,"errorMessage");
+                    }
+
                 }
             });
         });

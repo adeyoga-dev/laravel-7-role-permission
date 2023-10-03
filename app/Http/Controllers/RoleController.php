@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 //model
 use Spatie\Permission\Models\Role;
 //package

@@ -71,6 +71,8 @@
                         $("#editRoleModal").modal("toggle");
                         $('#roleTable').DataTable().ajax.reload();
                         alert(data);
+                        //mereset error message
+                        $("#errorMessage").empty();
                     }else{
                         printErrorMsg(data.error,"errorMessage");
                     }

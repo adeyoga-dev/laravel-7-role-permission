@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Role;
 // package
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -106,6 +107,16 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validasi data
+        $validator =  Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+        //jika validasi gagal akan mengirim pesan error
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->all()
+            ]);
+        }
         $user = User::find($id);
         $role = Role::find($request->roleId);
         //menghapus semua role pada user
