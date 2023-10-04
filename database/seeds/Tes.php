@@ -48,7 +48,7 @@ class Tes extends Seeder
         // $writerRole->givePermissionTo('view posts');
         // create demo users
         $user1 = User::create([
-            'name' => 'Muhammad Rizki Adeyoga',
+            'name' => 'Super Admin',
             'nik' => '1822003',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('12345678')

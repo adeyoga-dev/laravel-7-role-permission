@@ -29,7 +29,7 @@ class UserController extends Controller
     public function getUserDatatable()
     {
         // mendapatkan data user format datatable
-        $users = User::get();
+        $users = User::select('id','name','email','nik','status')->get();
         //kirim hasil
         return DataTables::of($users)
         ->addIndexColumn()
@@ -73,7 +73,7 @@ class UserController extends Controller
     public function show($id)
     {
         // mendapatkan data user
-        $user = User::find($id);
+        $user = User::select('id','name','email')->find($id);
         $roleId = $user->roles()->pluck('id')->first();
         //membungkus data
         $data = [

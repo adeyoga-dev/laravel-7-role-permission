@@ -1,5 +1,5 @@
 <div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content card-border-radius">
             <div class="modal-header header-black">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Role</h1>

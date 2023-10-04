@@ -8,9 +8,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="//fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.css') }}">
@@ -24,7 +21,7 @@
     <!-- Header -->
     @include('layouts.partials.header')
     <!-- Content -->
-    <div class="container-fluid mt-3 px-3">
+    <div class="container-fluid p-5">
         <div class="row justify-content-center">
             @yield('content')
         </div>

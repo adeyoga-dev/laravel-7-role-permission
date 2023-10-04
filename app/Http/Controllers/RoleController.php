@@ -29,7 +29,7 @@ class RoleController extends Controller
     public function getRoleDatatable()
     {
         // mendapatkan data user format datatable
-        $roles = Role::latest()->get();
+        $roles = Role::select('id','name')->get();
         return DataTables::of($roles)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -47,7 +47,7 @@ class RoleController extends Controller
 
     public function getRoleJson()
     {
-        $roles = Role::get();
+        $roles = Role::select('id','name')->get();
         return $roles;
     }
 
@@ -75,7 +75,7 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        $role = Role::find($id);
+        $role = Role::select('id','name')->find($id);
         return $role;
     }
 

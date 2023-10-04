@@ -9,6 +9,7 @@
                         <th class="text-center">No</th>
                         <th class="text-center">Nama</th>
                         <th class="text-center">Email</th>
+                        <th class="text-center">NIK</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Aksi</th>
                     </tr>
@@ -23,6 +24,7 @@
         $("#userTable").DataTable({
             processing: true,
             serverSide: true,
+            pageLength: 10,
             ajax: "{{ route('user.get.datatable') }}",
             columns: [{
                     "data": 'DT_RowIndex',
@@ -34,6 +36,9 @@
                 },
                 {
                     "data": "email"
+                },
+                {
+                    "data": "nik"
                 },
                 {
                     "data": "status"
