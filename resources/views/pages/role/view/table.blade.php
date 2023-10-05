@@ -3,7 +3,8 @@
         <div class="card-header">Daftar Role</div>
         <div class="card-body table-responsive">
             <div class="d-grid gap-2 my-3">
-                <button type="button" class="btn btn-success btn-sm" id="btnAddRoleModal"><i class="fa fa-plus"></i> Tambahkan Role</button>
+                <button type="button" class="btn btn-success btn-sm" id="btnAddRoleModal"><i class="fa fa-plus"></i>
+                    Tambahkan Role</button>
             </div>
             <table id="roleTable" class="table-striped w-100">
                 <thead>
@@ -40,7 +41,7 @@
             ],
         });
         //#########################################################################
-        $( document ).on("click", "#btnDelete", function(){
+        $(document).on("click", "#btnDelete", function() {
             //mendapatkan data
             var role = $(this).attr("data-id");
             // mereplace url dengan id
@@ -48,12 +49,12 @@
             var newUrl = url.replace("#id", role);
             // mengupdate status user
             $.ajax({
-                type : "DELETE",
-                url : newUrl,
-                data : {
+                type: "DELETE",
+                url: newUrl,
+                data: {
                     "_token": token
                 },
-                success : function(data){
+                success: function(data) {
                     $('#roleTable').DataTable().ajax.reload();
                     alert(data);
                 }

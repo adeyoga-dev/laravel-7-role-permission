@@ -14,9 +14,10 @@
     <!-- Microtip -->
     <link rel="stylesheet" href="//unpkg.com/microtip/microtip.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @stack('custom-style')
 </head>
+
 <body>
     <!-- Header -->
     @include('layouts.partials.header')
@@ -31,12 +32,13 @@
     <!-- Bootstrap -->
     <script src="{{ asset('js/bootstrap/bootstrap.bundle.js') }}" defer></script>
     <!-- Jquery -->
-    <script src="//code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
     <!-- Font Awesome -->
     <script src="//kit.fontawesome.com/9d9ec351a4.js" crossorigin="anonymous"></script>
     <!-- Custom Scripts-->
     @stack('custom-script')
-    <script src="{{asset('js/my.script.js')}}"></script>
+    <script src="{{ asset('js/my.script.js') }}"></script>
     <script>
         let token = $("meta[name='csrf-token']").attr("content");
     </script>

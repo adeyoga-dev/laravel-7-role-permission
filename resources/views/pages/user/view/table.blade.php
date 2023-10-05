@@ -1,4 +1,3 @@
-
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">Daftar User</div>
@@ -51,23 +50,23 @@
             ],
         });
         //#########################################################################
-        $( document ).on("click", "#btnActive,#btnNonActive", function(){
+        $(document).on("click", "#btnActive,#btnNonActive", function() {
             var userId = $(this).attr("data-id");
             // mereplace url dengan id
             var url = "{{ route('user.edit', '#id') }}";
             var newUrl = url.replace("#id", userId);
             // mengupdate status user
             $.ajax({
-                type : "GET",
-                url : newUrl,
-                success : function(data){
+                type: "GET",
+                url: newUrl,
+                success: function(data) {
                     $('#userTable').DataTable().ajax.reload();
                     alert(data);
                 }
             });
         });
         //#########################################################################
-        $( document ).on("click", "#btnDelete", function(){
+        $(document).on("click", "#btnDelete", function() {
             var userId = $(this).attr("data-id");
             console.log(userId);
             // mereplace url dengan id
@@ -75,12 +74,12 @@
             var newUrl = url.replace("#id", userId);
             // mengupdate status user
             $.ajax({
-                type : "DELETE",
-                url : newUrl,
-                data : {
+                type: "DELETE",
+                url: newUrl,
+                data: {
                     "_token": token
                 },
-                success : function(data){
+                success: function(data) {
                     $('#userTable').DataTable().ajax.reload();
                     alert(data);
                 }
@@ -88,4 +87,3 @@
         });
     });
 </script>
-

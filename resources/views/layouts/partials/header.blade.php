@@ -17,41 +17,41 @@
             </ul>
 
             @guest
-            <div class="text-end">
-                <a href="{{route('login')}}" class="btn btn-outline-light me-2">Masuk</a>
-                <a href="{{route('register')}}" class="btn btn-warning">Daftar</a>
-            </div>
+                <div class="text-end">
+                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Masuk</a>
+                    <a href="{{ route('register') }}" class="btn btn-warning">Daftar</a>
+                </div>
             @else
-            <div>{{ Auth::user()->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            <div class="dropdown">
-                <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Menu
-                </a>
-                <ul class="dropdown-menu p-2 rounded-3 mx-0 border-0 shadow w-220px"data-bs-theme="dark">
-                    <li class="dropdown-item">Manajemen</li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="{{route('user.index')}}">User</a></li>
-                    <li><a class="dropdown-item" href="{{route('role.index')}}">Roles</a></li>
-                    <li><a class="dropdown-item" href="#">Permissions</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                <div>{{ Auth::user()->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="dropdown">
+                    <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Menu
+                    </a>
+                    <ul class="dropdown-menu p-2 rounded-3 mx-0 border-0 shadow w-220px"data-bs-theme="dark">
+                        <li class="dropdown-item">Manajemen</li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('user.index') }}">User</a></li>
+                        <li><a class="dropdown-item" href="{{ route('role.index') }}">Roles</a></li>
+                        <li><a class="dropdown-item" href="#">Permissions</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();
                         ">
-                            <i class="fa-solid fa-right-from-bracket"></i> Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div>
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             @endguest
         </div>
     </div>

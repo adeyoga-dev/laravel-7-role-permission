@@ -3,7 +3,8 @@
         <div class="modal-content card-border-radius">
             <div class="modal-header header-black">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Role</h1>
-                <button type="button" class="btn-close button-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close button-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="errorMessage">
@@ -26,7 +27,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        $( document ).on("click", "#btnView", function(){
+        $(document).on("click", "#btnView", function() {
             // memunculkan modal add role
             $("#editRoleModal").modal("toggle");
             // mereplace url dengan id
@@ -35,22 +36,21 @@
             var newUrl = url.replace("#id", roleId);
             /// mendapatkan data role
             $.ajax({
-                type : "GET",
-                url : newUrl,
-                success : function(data){
+                type: "GET",
+                url: newUrl,
+                success: function(data) {
                     //cek apakah properti name dan email ada di objek data
-                    if(data.hasOwnProperty("name") && data.hasOwnProperty("id")){
+                    if (data.hasOwnProperty("name") && data.hasOwnProperty("id")) {
                         $("#role-edit").val(data.name);
-                        $("#role-edit").attr("data-id",data.id);
-                    }
-                    else{
+                        $("#role-edit").attr("data-id", data.id);
+                    } else {
                         $("#role-edit").val("Data tidak ditemukan");
                     }
                 }
             });
         });
         //#########################################################################
-        $("#btnEditSave").click(function(){
+        $("#btnEditSave").click(function() {
             // mendapatkan data pada textbox di modal edit user
             role = $("#role-edit").val();
             roleId = $("#role-edit").attr("data-id");
@@ -59,26 +59,25 @@
             var newUrl = url.replace("#id", roleId);
             // mengirim data user
             $.ajax({
-                type : "PUT",
-                url : newUrl,
-                data : {
-                    "role" : role,
+                type: "PUT",
+                url: newUrl,
+                data: {
+                    "role": role,
                     "_token": token
                 },
-                success : function(data){
+                success: function(data) {
                     //cek jika ada pesan error
-                    if($.isEmptyObject(data.error)){
+                    if ($.isEmptyObject(data.error)) {
                         $("#editRoleModal").modal("toggle");
                         $('#roleTable').DataTable().ajax.reload();
                         alert(data);
                         //mereset error message
                         $("#errorMessage").empty();
-                    }else{
-                        printErrorMsg(data.error,"errorMessage");
+                    } else {
+                        printErrorMsg(data.error, "errorMessage");
                     }
                 }
             });
         });
     });
 </script>
-

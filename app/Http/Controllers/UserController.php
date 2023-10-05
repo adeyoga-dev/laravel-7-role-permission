@@ -112,7 +112,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
         //jika validasi gagal akan mengirim pesan error
-        if ($validator->fails()) {
+        if($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors()->all()
             ]);
