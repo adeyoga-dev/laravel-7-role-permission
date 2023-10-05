@@ -35,8 +35,6 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        //mendapatkan role
-        $role = Role::find(2);
         //mendaftarkan user
         $user = User::create([
             'name' => $data['name'],
@@ -44,8 +42,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        //memberikan role user
-        $user->assignRole($role);
         //kirim hasil
         return $user;
     }

@@ -7,9 +7,11 @@
 @section('content')
     <!-- tabel view role -->
     @include('pages.role.view.table')
-    <!-- modal add, view dan edit role -->
+    <!-- modal add, view, edit role, dan edit permission -->
     @include('pages.role.modal.add')
     @include('pages.role.modal.edit')
+    @include('pages.role.modal.permission')
+
     {{-- @include("pages.role.modal.edit") --}}
 @endsection
 <!-- Custom Scrpits -->

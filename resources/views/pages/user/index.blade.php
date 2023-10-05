@@ -7,7 +7,7 @@
 @section('content')
     <!-- tabel view user -->
     @include('pages.user.view.table')
-    <!-- modal view dan edit user -->
+    <!-- modal view, dan edit user -->
     @include('pages.user.modal.edit')
 @endsection
 <!-- Custom Scrpits -->

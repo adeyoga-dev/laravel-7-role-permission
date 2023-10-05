@@ -50,14 +50,12 @@
                 url: "{{ route('role.get.json') }}",
                 success: function(data) {
                     $.each(data, function(index, value) {
+                        $("#role").append('<option value="">Pilih role...</option>')
                         //cek apakah properti name dan id ada di objek value
-                        if (value.hasOwnProperty("name") && value.hasOwnProperty(
-                                "id")) {
-                            $("#role").append('<option value="' + value["id"] +
-                                '">' + value["name"] + '</option>')
+                        if (value.hasOwnProperty("name") && value.hasOwnProperty("id")) {
+                            $("#role").append('<option value="' + value["id"] +'">' + value["name"] + '</option>')
                         } else {
-                            $("#role").append(
-                                '<option value="">Data tidak ada</option>')
+                            $("#role").append('<option value="">Data tidak ada</option>')
                         }
                     });
                 }

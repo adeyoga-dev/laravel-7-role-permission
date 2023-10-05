@@ -38,33 +38,29 @@ class Tes extends Seeder
         Permission::create(['name' => 'delete permission']);
         //create roles and assign existing permissions
         $super_admin = Role::create(['name' => 'Super Admin']);
-        $user = Role::create(['name' => 'User']);
-        // //create roles and assign existing permissions
-        // $writerRole = Role::create(['name' => 'writer']);
-        // $writerRole->givePermissionTo('view posts');
+        // create roles and assign existing permissions
+        // $user->givePermissionTo('view permission');
         // create demo users
-        $user1 = User::create([
+        $user = User::create([
             'name' => 'Super Admin',
             'nik' => '1822003',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('12345678')
         ]);
-        $user1->assignRole($super_admin);
+        $user->assignRole($super_admin);
 
-        $user2 = User::create([
+        User::create([
             'name' => 'Admin',
             'nik' => '1822004',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678')
         ]);
-        $user2->assignRole($user);
 
-        $user3 = User::create([
+        User::create([
             'name' => 'User 1',
             'nik' => '1822005',
             'email' => 'user1@gmail.com',
             'password' => bcrypt('12345678')
         ]);
-        $user3->assignRole($user);
     }
 }

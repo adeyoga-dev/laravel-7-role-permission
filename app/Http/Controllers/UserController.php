@@ -14,6 +14,7 @@ class UserController extends Controller
 
     public  function __construct()
     {
+        //inisialisasi permission
         $this->middleware('permission:view user', ['only' => ['index']]);
         $this->middleware('permission:show user', ['only' => ['show','getUserDatatable']]);
         $this->middleware('permission:create user', ['only' => ['create store']]);
@@ -25,40 +26,6 @@ class UserController extends Controller
     {
         // kirim hasil
         return view('pages.user.index');
-    }
-
-    public function getUserDatatable()
-    {
-        // mendapatkan data user format datatable
-        $users = User::select('id','name','email','nik','status')->get();
-        // kirim hasil
-        return DataTables::of($users)
-        ->addIndexColumn()
-        ->addColumn('action', function($row){
-            $btnActive = $this->buttonAction("success","btnActive","Aktifkan","fa-solid fa-check",$row->id);
-            $btnNonActive = $this->buttonAction("warning","btnNonActive","Non-Aktifkan","fa-solid fa-circle-xmark",$row->id);
-            $btnStatus = $btnActive;
-            // cek tombol status berdasarkan status akun
-            if($row->status == 'active') $btnStatus = $btnNonActive;
-            // cek jika akun super admin
-            if($row->id == 1){
-                return "Tidak ada aksi";
-            }
-            return
-                $this->buttonAction("primary","btnView","Lihat/Edit","fa-solid fa-pen-to-square",$row->id)
-                .$this->buttonAction("danger","btnDelete","Hapus","fa-solid fa-trash",$row->id)
-                .$btnStatus
-            ;
-        })
-        ->editColumn('status',function($row){
-            $badgeActive = '<span class="badge bg-success">Active</span>';
-            $badgeNonActive = '<span class="badge bg-danger">Non Active</span>';
-            // cek badge status berdasarkan status akun
-            if($row->status == 'active') return $badgeActive;
-            return $badgeNonActive;
-        })
-        ->rawColumns(['action','status'])
-        ->make();
     }
 
     public function create()
@@ -86,6 +53,51 @@ class UserController extends Controller
 
     }
 
+    public function getUserDatatable()
+    {
+        // mendapatkan data user format datatable
+        $users = User::select('id','name','email','nik','status')->get();
+        // kirim hasil
+        return DataTables::of($users)
+        ->addIndexColumn()
+        ->addColumn('action', function($row){
+            //inisialisasi tombol action
+            $btnAction ="";
+            $btnView = $this->buttonAction("primary","btnView","Lihat/Edit","fa-solid fa-pen-to-square",$row->id);
+            $btnDelete = $this->buttonAction("danger","btnDelete","Hapus","fa-solid fa-trash",$row->id);
+            $btnActive = $this->buttonAction("success","btnActive","Aktifkan","fa-solid fa-check",$row->id);
+            $btnNonActive = $this->buttonAction("warning","btnNonActive","Non-Aktifkan","fa-solid fa-circle-xmark",$row->id);
+            //default status
+            $btnStatus = $btnActive;
+            //get permission user
+            $userData = $this->getUserData();
+            // cek tombol status berdasarkan status akun
+            if($row->status == 'active') $btnStatus = $btnNonActive;
+            //cek berdasarkan permission
+            if ($userData->can('edit user')) {
+                $btnAction = $btnView.$btnStatus;
+            }
+            if ($userData->can('delete user')) {
+                $btnAction = $btnAction.$btnDelete;
+            }
+            // cek jika akun super admin
+            if($row->id == 1){
+                return "Tidak ada aksi";
+            }
+
+            return $btnAction;
+        })
+        ->editColumn('status',function($row){
+            $badgeActive = '<span class="badge bg-success">Active</span>';
+            $badgeNonActive = '<span class="badge bg-danger">Non Active</span>';
+            // cek badge status berdasarkan status akun
+            if($row->status == 'active') return $badgeActive;
+            return $badgeNonActive;
+        })
+        ->rawColumns(['action','status'])
+        ->make();
+    }
+
     public function edit($id)
     {
         $user = User::find($id);
@@ -111,6 +123,7 @@ class UserController extends Controller
         // validasi data
         $validator =  Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
+            'roleId' => ['required', 'numeric'],
         ]);
         // jika validasi gagal akan mengirim pesan error
         if($validator->fails()) {

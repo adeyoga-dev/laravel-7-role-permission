@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 // model
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 // package
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -16,7 +17,7 @@ class RoleController extends Controller
         $this->middleware('permission:view role', ['only' => ['index']]);
         $this->middleware('permission:show role', ['only' => ['show getRoleJson getRoleDatatable']]);
         $this->middleware('permission:create role', ['only' => ['create store']]);
-        $this->middleware('permission:edit role', ['only' => ['edit update']]);
+        $this->middleware('permission:edit role', ['only' => ['edit update updatePermissionRole']]);
         $this->middleware('permission:delete role', ['only' => ['destroy']]);
     }
 
@@ -24,31 +25,6 @@ class RoleController extends Controller
     {
         // kirim hasil
         return view('pages.role.index');
-    }
-
-    public function getRoleDatatable()
-    {
-        // mendapatkan data user format datatable
-        $roles = Role::select('id','name')->get();
-        return DataTables::of($roles)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                // cek jika role super admin
-                if($row->id == 1 || $row->id == 2){
-                    return "Tidak ada aksi";
-                }
-                return
-                    $this->buttonAction("primary", "btnView", "Lihat/Edit", "fa-solid fa-pen-to-square", $row->id)
-                    .$this->buttonAction("danger", "btnDelete", "Hapus", "fa-solid fa-trash", $row->id);
-            })
-            ->rawColumns(['action'])
-            ->make();
-    }
-
-    public function getRoleJson()
-    {
-        $roles = Role::select('id','name')->get();
-        return $roles;
     }
 
     public function create()
@@ -79,6 +55,37 @@ class RoleController extends Controller
         return $role;
     }
 
+    public function getRoleDatatable()
+    {
+        // mendapatkan data user format datatable
+        $roles = Role::select('id','name')->get();
+        return DataTables::of($roles)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                // cek jika role super admin
+                if($row->id == 1){
+                    return "Tidak ada aksi";
+                }
+                return $this->buttonAction("primary","btnView","Lihat/Edit","fa-solid fa-pen-to-square",$row->id)
+                    .$this->buttonAction("info","btnPermission","Edit Permission","fa-solid fa-key",$row->id)
+                    .$this->buttonAction("danger", "btnDelete", "Hapus", "fa-solid fa-trash", $row->id);
+            })
+            ->rawColumns(['action'])
+            ->make();
+    }
+
+    public function getRoleJson()
+    {
+        $roles = Role::select('id','name')->get();
+        return $roles;
+    }
+
+    public function getRolePermission($id){
+        // mendapatkan data permission berdasarkan role
+        $permission = Role::with('permissions')->find($id);
+        return $permission;
+    }
+
     public function edit($id)
     {
         //
@@ -105,6 +112,23 @@ class RoleController extends Controller
         if($role) return "Berhasil disimpan";
         return "Gagal disimpan";
 
+    }
+
+    public function updatePermissionRole(Request $request){
+        //mendapatkan data role
+        $role = Role::find($request->roleId);
+        // menghapus semua permission berdasarkan role
+        $role->syncPermissions([]);
+        // check jika data di request ada
+        if ($request->has('permission') && is_array($request->permission)) {
+            foreach ($request->permission as $item) {
+                $permission = Permission::find($item);
+                // update permission berdasarkan role
+                $role->givePermissionTo($permission);
+            }
+        }
+
+        return "Berhasil di simpan";
     }
 
     public function destroy($id)

@@ -34,7 +34,7 @@ class PermissionController extends Controller
         return DataTables::of($permission)
         ->addIndexColumn()
         ->addColumn('action', function($row){
-            return$this->buttonAction("danger","btnDelete","Hapus","fa-solid fa-trash",$row->id);
+            return $this->buttonAction("danger","btnDelete","Hapus","fa-solid fa-trash",$row->id);
         })
         ->rawColumns(['action'])
         ->make();
@@ -66,6 +66,14 @@ class PermissionController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function getPermissionJson()
+    {
+        // mendapatkan data permission format datatable
+        $permission = Permission::select('id','name')->orderBy('id')->get();
+        // kirim hasil
+        return $permission;
     }
 
     public function edit($id)

@@ -25,6 +25,10 @@
             serverSide: true,
             pageLength: 10,
             ajax: "{{ route('user.get.datatable') }}",
+            "columnDefs": [
+                { "searchable": false, "targets": [0,5] },
+                { "orderable": false, "targets": [0,5] }
+            ],
             columns: [{
                     "data": 'DT_RowIndex',
                 },
@@ -43,10 +47,6 @@
                 {
                     "data": "action",
                 },
-            "columnDefs": [
-                { "searchable": false, "targets": [0,5] },
-                { "orderable": false, "targets": [0,5] }
-            ]
             ],
         });
         //#########################################################################

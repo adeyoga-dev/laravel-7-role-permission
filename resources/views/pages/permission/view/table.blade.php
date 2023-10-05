@@ -26,6 +26,10 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('permission.get.datatable') }}",
+            "columnDefs": [
+                { "searchable": false, "targets": [0,2] },
+                { "orderable": false, "targets": [0,2] }
+            ],
             columns: [{
                     "data": 'DT_RowIndex',
                 },
@@ -36,10 +40,6 @@
                     "data": "action",
                 },
             ],
-            "columnDefs": [
-                { "searchable": false, "targets": [0,2] },
-                { "orderable": false, "targets": [0,2] }
-            ]
         });
         //#########################################################################
         $(document).on("click", "#btnDelete", function() {

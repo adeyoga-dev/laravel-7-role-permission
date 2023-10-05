@@ -11,8 +11,8 @@
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="permission" class="col-md-2 col-form-label text-md-right">Permission</label>
                     <div class="col-md-10">
+                        <label for="permission" class="col-md-2 col-form-label text-md-right">Permission</label>
                         <input id="permission" type="text" class="form-control" name="permission" required
                             placeholder="Contoh: view user, delete role">
                     </div>
