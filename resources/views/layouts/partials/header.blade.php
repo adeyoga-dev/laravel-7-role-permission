@@ -33,9 +33,16 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('user.index') }}">User</a></li>
-                        <li><a class="dropdown-item" href="{{ route('role.index') }}">Roles</a></li>
-                        <li><a class="dropdown-item" href="#">Permissions</a></li>
+                        @can('view user')
+                            <li><a class="dropdown-item" href="{{ route('user.index') }}">Users</a></li>
+                        @endcan
+                        @can('view role')
+                            <li><a class="dropdown-item" href="{{ route('role.index') }}">Roles</a></li>
+                        @endcan
+                        @can('view permission')
+                            <li><a class="dropdown-item" href="{{ route('permission.index') }}">Permissions</a></li>
+                        @endcan
+                        <li><a class="dropdown-item" href="#">Profiles</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
