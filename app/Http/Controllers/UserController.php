@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
     public  function __construct()
     {
         $this->middleware('permission:view user', ['only' => ['index']]);
@@ -22,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-        //kirim hasil
+        // kirim hasil
         return view('pages.user.index');
     }
 
@@ -30,7 +31,7 @@ class UserController extends Controller
     {
         // mendapatkan data user format datatable
         $users = User::select('id','name','email','nik','status')->get();
-        //kirim hasil
+        // kirim hasil
         return DataTables::of($users)
         ->addIndexColumn()
         ->addColumn('action', function($row){
@@ -39,7 +40,7 @@ class UserController extends Controller
             $btnStatus = $btnActive;
             // cek tombol status berdasarkan status akun
             if($row->status == 'active') $btnStatus = $btnNonActive;
-            //cek jika akun super admin
+            // cek jika akun super admin
             if($row->id == 1){
                 return "Tidak ada aksi";
             }
@@ -75,12 +76,12 @@ class UserController extends Controller
         // mendapatkan data user
         $user = User::select('id','name','email')->find($id);
         $roleId = $user->roles()->pluck('id')->first();
-        //membungkus data
+        // membungkus data
         $data = [
             'user' => $user,
             'roleId' => $roleId
         ];
-        //kirim hasil
+        // kirim hasil
         return $data;
 
     }
@@ -88,11 +89,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        //check jika user ada
+        // check jika user ada
         if(!isset($user)){
             return "Gagal di non-aktifkan";
         }
-        //update status user
+        // update status user
         if($user->status == "active"){
             $user->status = "nonactive";
             $message = "Berhasil di non-aktifkan";
@@ -101,17 +102,17 @@ class UserController extends Controller
             $message = "Berhasil di aktifkan";
         }
         $user->save();
-        //kirim hasil
+        // kirim hasil
         return $message;
     }
 
     public function update(Request $request, $id)
     {
-        //validasi data
+        // validasi data
         $validator =  Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
         ]);
-        //jika validasi gagal akan mengirim pesan error
+        // jika validasi gagal akan mengirim pesan error
         if($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors()->all()
@@ -119,13 +120,13 @@ class UserController extends Controller
         }
         $user = User::find($id);
         $role = Role::find($request->roleId);
-        //menghapus semua role pada user
+        // menghapus semua role pada user
         $user->revokeAllRoles();
-        //update data user
+        // update data user
         $user->name = $request->name;
         $user->assignRole($role);
         $user->save();
-        //cek jika data ada lalu kirim hasil
+        // cek jika data ada lalu kirim hasil
         if($user && $role) return "Berhasil disimpan";
         return "Gagal disimpan";
     }
@@ -134,7 +135,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        //cek jika data ada lalu kirim hasil
+        // cek jika data ada lalu kirim hasil
         if($user) return "Berhasil dihapus";
         return "Gagal terhapus";
     }

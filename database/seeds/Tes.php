@@ -24,16 +24,12 @@ class Tes extends Seeder
         Permission::create(['name' => 'create user']);
         Permission::create(['name' => 'edit user']);
         Permission::create(['name' => 'delete user']);
-        Permission::create(['name' => 'active user']);
-        Permission::create(['name' => 'non-active user']);
         // crete permission role
         Permission::create(['name' => 'view role']);
-        Permission::create(['name' => 'create role']);
         Permission::create(['name' => 'show role']);
+        Permission::create(['name' => 'create role']);
         Permission::create(['name' => 'edit role']);
         Permission::create(['name' => 'delete role']);
-        Permission::create(['name' => 'active role']);
-        Permission::create(['name' => 'non-active role']);
         // crete permission permission
         Permission::create(['name' => 'view permission']);
         Permission::create(['name' => 'show permission']);
@@ -41,8 +37,8 @@ class Tes extends Seeder
         Permission::create(['name' => 'edit permission']);
         Permission::create(['name' => 'delete permission']);
         //create roles and assign existing permissions
-        $super_admin = Role::create(['name' => 'super-admin']);
-        $user = Role::create(['name' => 'user']);
+        $super_admin = Role::create(['name' => 'Super Admin']);
+        $user = Role::create(['name' => 'User']);
         // //create roles and assign existing permissions
         // $writerRole = Role::create(['name' => 'writer']);
         // $writerRole->givePermissionTo('view posts');

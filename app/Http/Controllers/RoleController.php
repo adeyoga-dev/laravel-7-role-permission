@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-//model
+// model
 use Spatie\Permission\Models\Role;
-//package
+// package
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +22,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        //kirim hasil
+        // kirim hasil
         return view('pages.role.index');
     }
 
@@ -33,7 +33,7 @@ class RoleController extends Controller
         return DataTables::of($roles)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                //cek jika role super admin
+                // cek jika role super admin
                 if($row->id == 1 || $row->id == 2){
                     return "Tidak ada aksi";
                 }
@@ -57,19 +57,19 @@ class RoleController extends Controller
     }
 
     public function store(Request $request)
-    {   //validasi data
+    {   // validasi data
         $validator =  Validator::make($request->all(), [
             'role' => ['required', 'string', 'max:255'],
         ]);
-        //jika validasi gagal akan mengirim pesan error
+        // jika validasi gagal akan mengirim pesan error
         if ($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors()->all()
             ]);
         }
-        //membuat role dari request
+        // membuat role dari request
         Role::create(['name' => $request->role]);
-        //kirim hasil
+        // kirim hasil
         return "Berhasil disimpan";
     }
 
@@ -86,22 +86,22 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        //validasi data
+        // validasi data
         $validator =  Validator::make($request->all(), [
             'role' => ['required', 'string', 'max:255'],
         ]);
-        //jika validasi gagal akan mengirim pesan error
+        // jika validasi gagal akan mengirim pesan error
         if ($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors()->all()
             ]);
         }
-        //mencari role berdasarkan id
+        // mencari role berdasarkan id
         $role = Role::find($id);
-        //update data role
+        // update data role
         $role->name = $request->role;
         $role->save();
-        //cek jika data ada lalu kirim hasil
+        // cek jika data ada lalu kirim hasil
         if($role) return "Berhasil disimpan";
         return "Gagal disimpan";
 
@@ -109,15 +109,15 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        //mencari role berdasarkan id
+        // mencari role berdasarkan id
         $role = Role::where('id', $id)->first();
-        //cek user yang menggunakan role
+        // cek user yang menggunakan role
         $userHasRole = $role->users;
-        //cek jumlah user jika memakai role tersebut
+        // cek jumlah user jika memakai role tersebut
         if($userHasRole->count() > 0){
             return "Gagal, role memiliki user terdaftar";
         }
-        //menghapus role
+        // menghapus role
         if ($role) {
             $role->delete();
             return "Berhasil dihapus";
