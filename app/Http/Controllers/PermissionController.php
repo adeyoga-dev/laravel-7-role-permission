@@ -29,7 +29,7 @@ class PermissionController extends Controller
     public function getPermissionDatatable()
     {
         // mendapatkan data permission format datatable
-        $permission = Permission::select('id','name')->orderBy('name')->get();
+        $permission = Permission::select('id','name')->orderBy('id')->get();
         // kirim hasil
         return DataTables::of($permission)
         ->addIndexColumn()
