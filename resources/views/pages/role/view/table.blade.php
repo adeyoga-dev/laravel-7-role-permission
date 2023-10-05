@@ -27,17 +27,17 @@
             ajax: "{{ route('role.get.datatable') }}",
             columns: [{
                     "data": 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
                 },
                 {
                     "data": "name"
                 },
                 {
                     "data": "action",
-                    orderable: false,
-                    searchable: false
                 },
+            "columnDefs": [
+                { "searchable": false, "targets": [0,2] },
+                { "orderable": false, "targets": [0,2] }
+            ]
             ],
         });
         //#########################################################################

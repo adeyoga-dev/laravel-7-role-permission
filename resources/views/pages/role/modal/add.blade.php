@@ -11,7 +11,7 @@
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="role" class="col-md-2 col-form-label text-md-right">Role</label>
+                    <label for="role-add" class="col-md-2 col-form-label text-md-right">Role</label>
                     <div class="col-md-10">
                         <input id="role-add" type="text" class="form-control" name="role" required
                             placeholder="Contoh: Administrator, Moderator, Pengguna">

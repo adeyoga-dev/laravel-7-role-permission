@@ -11,7 +11,7 @@
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="role" class="col-md-2 col-form-label text-md-right">Role</label>
+                    <label for="role-edit" class="col-md-2 col-form-label text-md-right">Role</label>
                     <div class="col-md-10">
                         <input id="role-edit" type="text" class="form-control" data-id="">
                     </div>
