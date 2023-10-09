@@ -23,3 +23,6 @@ Route::GET('/get-permission-role/{id}', 'RoleController@getRolePermission')->nam
 Route::resource('permission','PermissionController');
 Route::get('/get-permission-datatable', 'PermissionController@getPermissionDatatable')->name('permission.get.datatable');
 Route::get('/get-permission-json', 'PermissionController@getPermissionJson')->name('permission.get.json');
+// route profile
+Route::resource('profile','ProfileController');
+Route::post('update-password-profile','ProfileController@updatePassword')->name('profile.update.password');

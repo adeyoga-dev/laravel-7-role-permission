@@ -41,7 +41,7 @@ class UserController extends Controller
     public function show($id)
     {
         // mendapatkan data user
-        $user = User::select('id','name','email')->find($id);
+        $user = User::select('id','name','email','nik')->find($id);
         $roleId = $user->roles()->pluck('id')->first();
         // membungkus data
         $data = [

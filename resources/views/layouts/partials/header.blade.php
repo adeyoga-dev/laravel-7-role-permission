@@ -42,7 +42,7 @@
                         @can('view permission')
                             <li><a class="dropdown-item" href="{{ route('permission.index') }}">Permissions</a></li>
                         @endcan
-                        <li><a class="dropdown-item" href="#">Profiles</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profiles</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
