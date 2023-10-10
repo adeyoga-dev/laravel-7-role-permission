@@ -105,18 +105,20 @@ class RoleController extends Controller
         }
         // mencari role berdasarkan id
         $role = Role::find($id);
+        if(!$role) return "Gagal disimpan";
         // update data role
         $role->name = $request->role;
         $role->save();
         // cek jika data ada lalu kirim hasil
-        if($role) return "Berhasil disimpan";
-        return "Gagal disimpan";
+
+        return "Behasil disimpan";
 
     }
 
     public function updatePermissionRole(Request $request){
         //mendapatkan data role
         $role = Role::find($request->roleId);
+        if(!$role) return "Gagal di simpan";
         // menghapus semua permission berdasarkan role
         $role->syncPermissions([]);
         // check jika data di request ada

@@ -41,7 +41,7 @@ class ProfileController extends Controller
     public function sendEmail(Request $request){
         // validasi data
         $validator =  Validator::make($request->all(), [
-            'newEmail' => ['required', 'email', 'string', 'email', 'max:255'],
+            'newEmail' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
         ]);
         // jika validasi gagal akan mengirim pesan error
         if ($validator->fails()) {
@@ -54,6 +54,7 @@ class ProfileController extends Controller
         $randomNumber = $faker->uuid();
         // inisialisasi data user
         $user = User::find($request->userId);
+        if(!$user) return "link konfirmasi email gagal terkirim";
         $name = $user->name;
         //cek jika token email user masih ada
         if(isset($user->email_token)){
@@ -77,7 +78,7 @@ class ProfileController extends Controller
 
         Mail::to($request->newEmail)->send(new SendEmail($data));
 
-        return "Kode konfirmasi pergantian email berhasil di kirim ke email lama anda";
+        return "Kode konfirmasi pergantian email berhasil di kirim ke email baru anda";
     }
 
     public function show($id)
@@ -97,11 +98,12 @@ class ProfileController extends Controller
     {
         // update data user
         $user = User::find($id);
+        if(!$user) return "Gagal disimpan";
         $user->name = $request->name;
         $user->save();
         // cek jika data ada lalu kirim hasil
-        if($user) return "Berhasil disimpan";
-        return "Gagal disimpan";
+
+        return "Berhasil disimpan";
     }
 
     public function updatePassword(Request $request){
@@ -118,6 +120,7 @@ class ProfileController extends Controller
         }
         // inisialisasi data user
         $user = User::find($request->userId);
+        if(!$user) return "User tidak ditemukan";
         $oldPassword = $user->password;
         $currentPassword = $request->currentPassword;
         // cek jika password sama
@@ -140,7 +143,7 @@ class ProfileController extends Controller
         if(!$user) return dd("Token tidak valid");
         //update email user
         $user->email = $email;
-        $user->email_token = "";
+        $user->email_token = NULL;
         $user->save();
         dd("email sudah di update");
     }

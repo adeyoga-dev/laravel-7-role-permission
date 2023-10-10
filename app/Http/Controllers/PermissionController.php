@@ -49,7 +49,7 @@ class PermissionController extends Controller
     {
         // validasi data
         $validator =  Validator::make($request->all(), [
-            'permission' => ['required', 'string', 'max:255'],
+            'permission' => ['required', 'string', 'max:255', 'unique:permissions,name'],
         ]);
         // jika validasi gagal akan mengirim pesan error
         if ($validator->fails()) {

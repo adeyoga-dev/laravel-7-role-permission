@@ -102,7 +102,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         // check jika user ada
-        if(!isset($user)){
+        if(!$user){
             return "Gagal di non-aktifkan";
         }
         // update status user

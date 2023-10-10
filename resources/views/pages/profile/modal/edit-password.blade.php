@@ -41,7 +41,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // mereplace url dengan id
+        // inisialisasi variabel
         var userId = "{{auth()->id()}}";
         //#########################################################################
         $("#btnPasswordModal").click(function(){
@@ -59,7 +59,6 @@
             }else{
                 $("#currentPassword").attr("type","password");
             }
-
         });
         //#########################################################################
         $("#btnNewPassword").click(function(){
