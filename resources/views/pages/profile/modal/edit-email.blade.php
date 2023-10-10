@@ -7,7 +7,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="errorMessage">
+                <div id="errorMessageEmail">
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group m-1">
@@ -53,7 +53,7 @@
                         $("#editEmailModal").modal("toggle");
                         alert(data);
                     } else {
-                        printErrorMsg(data.error, "errorMessage");
+                        printErrorMsg(data.error, "errorMessageEmail");
                     }
                 }
             });

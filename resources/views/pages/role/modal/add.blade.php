@@ -7,7 +7,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="errorMessage">
+                <div id="errorMessageAdd">
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group row mb-3">
@@ -53,7 +53,7 @@
                         $('#roleTable').DataTable().ajax.reload();
                         alert(data);
                     } else {
-                        printErrorMsg(data.error, "errorMessage");
+                        printErrorMsg(data.error, "errorMessageAdd");
                     }
                 }
             });

@@ -27,5 +27,6 @@ Route::get('get-permission-json', 'PermissionController@getPermissionJson')->nam
 Route::resource('profile','ProfileController');
 Route::post('update-password-profile','ProfileController@updatePassword')->name('profile.update.password');
 Route::post('send-email-profile','ProfileController@sendEmail')->name('profile.send.email');
+Route::get('confirmation-email/{data}','ProfileController@confirmationEmail');
 // email
 

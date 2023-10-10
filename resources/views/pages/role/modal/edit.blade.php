@@ -7,7 +7,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="errorMessage">
+                <div id="errorMessageEdit">
                     <!-- tempat pesan error -->
                 </div>
                 <div class="form-group row mb-3">
@@ -71,10 +71,8 @@
                         $("#editRoleModal").modal("toggle");
                         $('#roleTable').DataTable().ajax.reload();
                         alert(data);
-                        //mereset error message
-                        $("#errorMessage").empty();
                     } else {
-                        printErrorMsg(data.error, "errorMessage");
+                        printErrorMsg(data.error, "errorMessageEdit");
                     }
                 }
             });

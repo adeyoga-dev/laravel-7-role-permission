@@ -68,7 +68,6 @@
         //#########################################################################
         $(document).on("click", "#btnDelete", function() {
             var userId = $(this).attr("data-id");
-            console.log(userId);
             // mereplace url dengan id
             var url = "{{ route('user.destroy', '#id') }}";
             var newUrl = url.replace("#id", userId);

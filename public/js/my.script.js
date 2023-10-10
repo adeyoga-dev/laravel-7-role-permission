@@ -2,7 +2,7 @@ function printErrorMsg(msg,selector){
     //inisialisasi variabel
     var message = "",html;
     //mengosongkan pesan error
-    $("#errorMessage").empty();
+    $("#"+selector).empty();
     //melooping pesan error dan disimpan di variabel
     $.each( msg, function( key, value ) {
         message += "<li>"+value+"</li>";

@@ -13,6 +13,14 @@ use Faker\Factory as Faker;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view profile', ['only' => ['index']]);
+        $this->middleware('permission:show profile', ['only' => ['show getRoleJson getRoleDatatable']]);
+        $this->middleware('permission:create profile', ['only' => ['create store sendEmail']]);
+        $this->middleware('permission:edit profile', ['only' => ['edit update updatePassword']]);
+        $this->middleware('permission:delete profile', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -33,7 +41,7 @@ class ProfileController extends Controller
     public function sendEmail(Request $request){
         // validasi data
         $validator =  Validator::make($request->all(), [
-            'newEmail' => ['required', 'string', 'email', 'max:255'],
+            'newEmail' => ['required', 'email', 'string', 'email', 'max:255'],
         ]);
         // jika validasi gagal akan mengirim pesan error
         if ($validator->fails()) {
@@ -53,7 +61,7 @@ class ProfileController extends Controller
             $user->save();
         }
         // simpan nomor ke user
-        $user->email_token = $user->email." ".$randomNumber;
+        $user->email_token = $request->newEmail." ".$randomNumber;
         $user->save();
         // inisialisasi data
         $data = [
@@ -122,6 +130,19 @@ class ProfileController extends Controller
         }
         // kirim hasil
         return "Password tidak sama dengan yang lama";
+    }
+
+    public function confirmationEmail($data){
+        $parsingData = explode(" ",$data);
+        $email = $parsingData[0];
+        //mencari data user berdasarkan token email
+        $user = User::where('email_token',$data)->first();
+        if(!$user) return dd("Token tidak valid");
+        //update email user
+        $user->email = $email;
+        $user->email_token = "";
+        $user->save();
+        dd("email sudah di update");
     }
 
     public function destroy($id)

@@ -7,7 +7,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="errorMessage">
+                <div id="errorMessagePassword">
                     <!-- tempat pesan error -->
                 </div>
                 <div class="row">
@@ -92,7 +92,7 @@
                         $("#editPasswordModal").modal("toggle");
                         alert(data);
                     } else {
-                        printErrorMsg(data.error, "errorMessage");
+                        printErrorMsg(data.error, "errorMessagePassword");
                     }
                 }
             });
