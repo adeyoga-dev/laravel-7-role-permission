@@ -11,7 +11,7 @@ Laravel = versi 7
 2. Masuk atau cd ke direktori prrojek ini
 3. Lakukan instalasi package yang diperlukan Laravel dengan perintah ```composer install```
 4. Lakukan instalasi package yang diperlukan NodeJS dengan perintah ```npm install```
-5. Install autentikasi sistem nya dengan perintah ```npm run dev``` 2x
+5. Install autentikasi sistem nya dengan perintah ```npm run dev``` 2x (opsional)
 6. Buat database terserah namanya di MYSQL
 7. Lalu ketik perintah ```php artisan migrate:fresh --seed --seeder=Tes```
 8. Nyalakan server dengan perintah ```php artisan serve```
